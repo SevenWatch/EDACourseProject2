@@ -70,6 +70,7 @@ barplot(data$Emission, col= "blue", xlab = "Year", ylab ="Emission in Tons",
 dev.off()
 options(scipen=0) ##Returning to default.
 
+
 ###################################################################
 ##########        SEE YOU SPACE COWBOY...               ###########
 ###################################################################
@@ -370,7 +371,8 @@ data <- aggregate(subdata[, "Emissions"],
 colnames(data) <- c("City", "Year", "Emission")
 ##Threat the years as character to get the x axis sticks stable 
 ##and center the bars.
-data$Year <- as.character(data$Year)
+
+##data$Year <- as.character(data$Year)
 ##Changing fips number to city name
 data$City <- gsub("24510", "Baltimore City", data$City)
 data$City <- gsub("06037", "Los Angeles County", data$City)
@@ -379,6 +381,29 @@ data$City <- gsub("06037", "Los Angeles County", data$City)
 library(ggplot2) #loading the library
 
 png(filename= "plot6.png", width=480, height=480)
+
+mytitle <- as.character("Total Emissions of PM2.5 in\n Baltimore City (Maryland) and Los Angeles County (California)\n 1999 to 2008 from Motor Vehicle Source")
+p <- ggplot(data, aes(Year, Emission), group = City, color = City)
+p <- p + geom_line(size = 0.9, aes(linetype = City, color = City)) 
+p <- p + geom_point(size = 3.0, aes(color = City))
+p <- p + ggtitle(mytitle)
+p <- p + theme(plot.title = element_text(size=10,face="bold"))
+p <- p + ylab("Emission in Tons")
+p
+dev.off()
+
+
+
+###################################################################
+##########        SEE YOU SPACE COWBOY...               ###########
+###################################################################
+
+plot(1,1, main=expression( A[2]~and~B[2] ) )
+
+plot(1, 1, 
+     main = expression("Total Emissions of"~PM[2.5]~and~"in Baltimore City (Maryland) and Los Angeles County (California)\n 1999 to 2008 from Motor Vehicle Source"))
+###########PLOT 6 AS BARPLOT.
+
 mytitle <- as.character("Total Emissions of PM2.5 in\n Baltimore City (Maryland) and Los Angeles County (California)\n 1999 to 2008 from Motor Vehicle Source")
 p <- qplot(Year, Emission, data = data, facets =.~ City, geom = "bar", 
            stat="identity")
@@ -386,10 +411,3 @@ p <- p + ylab("Emission in Tons")
 p <- p + labs(title = mytitle)
 p <- p + theme(plot.title = element_text(size=14,face="bold"))
 p
-dev.off()
-
-###################################################################
-##########        SEE YOU SPACE COWBOY...               ###########
-###################################################################
-
-
