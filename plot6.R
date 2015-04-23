@@ -1,4 +1,3 @@
-
 ############################################################
 #############################################################################
 ##Greetings there! This is a R script called Plot6.R
@@ -26,6 +25,12 @@ NEI <- na.omit(NEI)
 
 ##We will need to subset by source (scc =vehicle sources) 
 ##We need to know the codes from the scc.rds file. 
+
+##SUBSETTING DECISION: 
+##I have decided to use *Veh in Short.Name to be as inclusive as possible
+##because some vehicles had the name abbreviated as "Veh". You can read in the
+##Course Forum about the open and multiple options possible.
+##https://class.coursera.org/exdata-013/forum/thread?thread_id=106
 codes <- SCC[, c("SCC", "Short.Name")] #subsetting
 #Selecting all rows containing Veh for Vehicle.
 codes <- subset(codes, grepl("*Veh", codes$Short.Name)) 

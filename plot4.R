@@ -25,6 +25,11 @@ NEI <- na.omit(NEI)
 ##We need to know the codes from the scc.rds file. 
 
 ##Obtaining scc codes with grepl function
+
+##SUBSETTING DECISION: 
+##I have decided to use *Coal in Short.Name to be as inclusive as possible. You
+##can read in the Course Forum about the open and multiple options possible.
+##https://class.coursera.org/exdata-013/forum/thread?thread_id=106
 codes <- SCC[, c("SCC", "Short.Name")] #Subsetting
 codes <- subset(codes, grepl("*Coal", codes$Short.Name))
 codes <- codes[, c("SCC")] #Obtaining the scc codes
